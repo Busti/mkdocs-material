@@ -53,8 +53,11 @@ export default class Toggle {
    * Update visibility
    */
   update() {
-    const active = window.pageYOffset >=
-      this.el_.children[0].offsetTop + (5 - 48)                                 // TODO: quick hack to enable same handling for hero
+    const fst = this.el_.children[0];
+    const rect = Array.from(fst.getContentRects())[0];
+    
+    const active = window.pageYOffset >= fst.offsetTop + rect.height;
+    
     if (active !== this.active_)
       this.el_.dataset.mdState = (this.active_ = active) ? "hidden" : ""
   }
